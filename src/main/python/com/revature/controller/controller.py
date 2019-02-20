@@ -25,7 +25,7 @@ def run_command(command):
         elif command == 'q':
             sys.exit()
         else:
-            print('Unknown command: {}'.format(command))
+            print('\n\nUnknown command: {}'.format(command))
     else:
         if command == '1':
             log_in()
@@ -34,11 +34,11 @@ def run_command(command):
         elif command == 'q':
             sys.exit()
         else:
-            print('Unknown command: {}'.format(command))
+            print('\n\nUnknown command: {}'.format(command))
 
 def print_menu():
     if service.current_user:
-        print("Logged in as {}\n1:Balance Inquiry\n2:Deposit\n3:Withdraw\n4:History\n5:Log out\n".format(service.current_user))
+        print("\n\nLogged in as {}\n1:Balance Inquiry\n2:Deposit\n3:Withdraw\n4:History\n5:Log out\n".format(service.current_user))
     else:
         print("\n1:Log in\n2:Register\n")
 
@@ -48,39 +48,39 @@ def log_in():
     if service.log_in(username, password):
         service.current_user = username
     else:
-        print('Invalid credentials')
+        print('\n\nInvalid credentials')
 def register():
     username = input('Enter a username:')
     while username.isnumeric() or not username.isalnum() or len(username) < 5:
-        print('Username must be alphanumeric and at least 5 characters')
+        print('\n\nUsername must be alphanumeric and at least 5 characters')
         username = input('Enter a username:')
     password = getpass('Enter a password:')
     if service.register(username, password):
-        print('Registeration succesful')
+        print('\n\nRegisteration successful')
         service.current_user = username
     else:
-        print('Username already in use.')
+        print('\n\nUsername already in use.')
 def log_out():
-    print('Logged out of {}'.format(service.current_user))
+    print('\n\nLogged out of {}'.format(service.current_user))
     service.current_user = ''
 def balance_inquiry():
-    print('Your current balance is {}'.format(service.balance_inquiry()))
+    print('\n\nYour current balance is {}'.format(service.balance_inquiry()))
 def deposit():
     amount = input('Enter the amount you would like to deposit:')
     while not valid_amount(amount):
-        print('Invalid amount')
+        print('\n\nInvalid amount')
         amount = input('Enter the amount you would like to deposit:')
     service.deposit(amount)
     balance_inquiry()
 def withdraw():
     amount = input('Enter the amount you would like to withdraw:')
     while not valid_amount(amount):
-        print('Invalid amount')
+        print('\n\nInvalid amount')
         amount = input('Enter the amount you would like to withdraw:')
     if service.withdraw(amount):
         balance_inquiry()
     else:
-        print('Insuffcient funds')
+        print('\n\nInsuffcient funds')
 def valid_amount(input):
     try:
         x = float(input)
